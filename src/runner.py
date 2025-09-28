@@ -80,15 +80,9 @@ def get_gemini_models(api_key: str | None = None):
     
 # Main loop
 if __name__ == "__main__":
-    # get_gemini_models()
+    get_gemini_models()
 
-    from openai import OpenAI
-    client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))   # or os.environ.get("OPENAI_API_KEY")
-    try:
-        resp = client.models.list()
-        print("API key valid — models returned:", len(getattr(resp, "data", []) or resp))
-    except Exception as e:
-        print("API key test failed:", e)
+    
 
     # ensure avatar exists (does not block)
     # avatar = get_avatar()
@@ -98,8 +92,8 @@ if __name__ == "__main__":
     # t1.start()
 
     # run the conversation loop in a background thread (non-daemon so we can cleanly join if needed)
-    # t2 = threading.Thread(target=run_conversation_loop, daemon=False)
-    # t2.start()
+    t2 = threading.Thread(target=run_conversation_loop, daemon=False)
+    t2.start()
 
     # # Run the GUI mainloop on the main thread (blocks here so process stays alive)
     # # avatar.run() must start Tk mainloop and block (defined in avatar.py)
